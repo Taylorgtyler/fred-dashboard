@@ -5,17 +5,22 @@ import { MetricCard } from './MetricCard';
 import { GDPChart } from './GDPChart';
 import { LaborChart } from './LaborChart';
 import useEconomicStore from '../store/economicStore';
+import { useMeanUnemploymentRateData } from '../hooks/UseMeanUnemploymentRateData';
 
 export const Dashboard: React.FC = () => {
-  const { gdp, unemployment, participation, presidentImage, isLoading } = useEconomicStore();
-
-  console.log('Is Loading:', isLoading);
-  console.log('GDP array:', gdp);
+  const { gdp, participation, presidentImage, isLoading, selectedDateRange } = useEconomicStore();
+  
+  const { data: unemploymentData, isError: unemploymentError } = useMeanUnemploymentRateData(
+    selectedDateRange[0].toISOString(),
+    selectedDateRange[1].toISOString()
+  );
 
   const latestGDP = !isLoading && gdp.length > 0 ? gdp[gdp.length - 1].GDPC1 : null;
-  console.log('Latest GDP:', latestGDP);
-  const latestUnemployment = unemployment[unemployment.length - 1]?.value || 0;
-  const latestParticipation = participation[participation.length - 1]?.value || 0;
+  const latestUnemployment = unemploymentData && Array.isArray(unemploymentData) && unemploymentData[0]
+    ? unemploymentData[0]['avg(UNRATE)']
+    : null;
+
+  const latestParticipation = participation[participation.length - 1]?.CIVPART || 0;
 
   return (
     <div className="p-4 sm:p-6 bg-gray-100 min-h-screen">
@@ -36,8 +41,9 @@ export const Dashboard: React.FC = () => {
         />
         <MetricCard
           title="Unemployment Rate"
-          value={`${latestUnemployment.toFixed(1)}%`}
+          value={unemploymentError || latestUnemployment === null ? '---' : `${latestUnemployment.toFixed(1)}%`}
           description="U-3 Rate"
+          isLoading={!unemploymentData}
         />
         <MetricCard
           title="Labor Force Participation"

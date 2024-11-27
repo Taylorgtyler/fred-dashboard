@@ -31,3 +31,27 @@ export const fetchGDPPerCapitaData = async (startDate: string, endDate: string) 
       throw error; // Rethrow the error for further handling if needed
     });
 };
+
+export const fetchUnemploymentRateData = async (startDate: string, endDate: string) => {
+  return axiosInstance.get(`/unemployment-rate?startDate=${startDate}&endDate=${endDate}`)
+    .then(response => {
+      console.log('Response:', response);
+      return response.data;
+    });
+};
+
+export const fetchMeanUnemploymentRateData = async (startDate: string, endDate: string) => {
+  return axiosInstance.get(`/mean-unemployment-rate?startDate=${startDate}&endDate=${endDate}`)
+    .then(response => {
+      console.log('Response:', response);
+      return response.data;
+    });
+};
+
+export const fetchLaborForceParticipationRateData = async (startDate: string, endDate: string) => {
+  return axiosInstance.get(`/labor-force-participation-rate?startDate=${startDate}&endDate=${endDate}`)
+    .then(response => {
+      console.log('Response:', response);
+      return response.data;
+    });
+};
