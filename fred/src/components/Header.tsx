@@ -8,12 +8,12 @@ interface HeaderProps {
 
 function Header({ toggleSidebar }: HeaderProps) {
   return (
-    <header className="flex justify-between items-center px-6 py-2 bg-white shadow-md mb-2">
-      <div className="flex items-center gap-4">
+    <header className="flex justify-between items-center px-6 py-2 bg-gray-800 shadow-md mb-2">
+      <div className="flex items-center gap-4 text-white">
         <button onClick={toggleSidebar}>
           <Bars3Icon className="h-6 w-6" />
         </button>
-        <h1 className="text-2xl font-bold text-gray-800 rounded-md p-2">
+        <h1 className="text-2xl font-bold text-white rounded-md p-2">
           US Economic Dashboard
         </h1>
       </div>
@@ -31,7 +31,7 @@ function Header({ toggleSidebar }: HeaderProps) {
           href="https://your-website.com" 
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-600 hover:text-gray-800 transition-colors"
+          className="text-gray-600 hover:text-white transition-colors"
         >
           <GlobeAltIcon className="h-6 w-6" />
         </a>

@@ -10,7 +10,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-800">
       <Header toggleSidebar={toggleSidebar} />
       <div className="relative">
         <Sidebar isOpen={isSidebarOpen} />

@@ -18,12 +18,12 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   isCurrency = false
 }) => {
   return (
-    <div className="bg-white rounded-lg p-6 shadow-lg">
-      <h3 className="text-lg font-semibold text-gray-700">{title}</h3>
-      <div className="text-3xl font-bold text-blue-600 my-2">
+    <div className="bg-gray-700 rounded-lg p-6 shadow-lg">
+      <h3 className="text-lg font-semibold text-white">{title}</h3>
+      <div className="text-3xl font-bold text-blue-400 my-2">
         {isLoading ? '---' : isPercentage ? `${value}%` : isCurrency ? `$${value}` : value}
       </div>
-      <p className="text-sm text-gray-500">{description}</p>
+      <p className="text-sm text-gray-200">{description}</p>
     </div>
   );
 }; 
