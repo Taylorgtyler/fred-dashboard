@@ -20,18 +20,18 @@ function Header({ toggleSidebar }: HeaderProps) {
       
       <div className="flex gap-4">
         <a 
-          href="https://linkedin.com/in/your-profile" 
+          href="https://www.linkedin.com/in/taylor-tyler-932349158/" 
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-600 hover:text-blue-600 transition-colors"
+          className="text-white hover:text-blue-600 transition-colors"
         >
           <UserPlusIcon className="h-6 w-6" />
         </a>
         <a 
-          href="https://your-website.com" 
+          href="https://taylorgtyler.com" 
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-600 hover:text-white transition-colors"
+          className="text-white hover:text-blue-600 transition-colors"
         >
           <GlobeAltIcon className="h-6 w-6" />
         </a>
