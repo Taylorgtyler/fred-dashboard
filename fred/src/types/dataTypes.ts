@@ -17,3 +17,8 @@ export type LFPRData = {
     DATE: string;
     CIVPART: number;
 }
+
+export type FFERData = {
+    DATE: string;
+    DFF: number;
+}
