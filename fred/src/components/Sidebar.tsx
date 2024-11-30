@@ -1,4 +1,5 @@
 import React from 'react';
+import { HomeIcon, MagnifyingGlassIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -8,15 +9,21 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   return (
     <div className={`
       fixed top-[64px] left-0 w-64 h-full 
-      bg-gray-800 text-white 
+      bg-gray-900 text-white 
       transition-transform duration-300 
       shadow-lg z-50
       ${isOpen ? 'translate-x-0' : '-translate-x-full'}
     `}>
       <nav className="flex flex-col p-4">
-        <a href="/" className="py-2 hover:bg-gray-700 rounded">Dashboard</a>
-        <a href="/about" className="py-2 hover:bg-gray-700 rounded">About</a>
-        <a href="/contact" className="py-2 hover:bg-gray-700 rounded">Contact</a>
+        <a href="/" className="py-2 hover:bg-gray-800 rounded flex items-center">
+          <HomeIcon className="w-4 h-4 mr-2 ml-2" /> <span>Dashboard</span>
+        </a>
+        <a href="/explore" className="py-2 hover:bg-gray-800 rounded flex items-center">
+          <MagnifyingGlassIcon className="w-4 h-4 mr-2 ml-2" /> <span>Explore</span>
+        </a>
+        <a href="/contact" className="py-2 hover:bg-gray-800 rounded flex items-center">
+          <ChatBubbleBottomCenterTextIcon className="w-4 h-4 mr-2 ml-2" /> <span>Contact</span>
+        </a>
       </nav>
     </div>
   );
