@@ -1,11 +1,18 @@
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Explore from "./pages/Explore";
 
 function App() {
   return (
     <>
       <Layout>
-        <Dashboard />
+        <Router>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/explore" element={<Explore />} />
+          </Routes>
+        </Router>
       </Layout>
     </>
   );
