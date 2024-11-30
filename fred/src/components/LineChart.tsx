@@ -1,9 +1,9 @@
 import { scaleLinear, scaleTime } from '@visx/scale';
-import { LinePath, AreaClosed, Circle } from '@visx/shape'; // Import Circle for data points
+import { LinePath, Circle } from '@visx/shape'; // Import Circle for data points
 import { AxisLeft, AxisBottom } from '@visx/axis';
 import { curveLinear } from '@visx/curve';
 import { timeFormat } from 'd3-time-format';
-import { useState } from 'react'; // Import useState for tooltip state management
+import { useState, useEffect, useRef } from 'react'; // Import useState and useRef for tooltip state management
 
 interface DataPoint {
   DATE: string;
@@ -12,8 +12,6 @@ interface DataPoint {
 
 interface LineChartProps<TData extends DataPoint> {
   data: TData[];
-  width?: number;
-  height?: number;
   valueKey: keyof TData;
   title?: string;
   valueFormatter?: (value: number) => string;
@@ -22,19 +20,38 @@ interface LineChartProps<TData extends DataPoint> {
 
 export function LineChart<TData extends DataPoint>({ 
   data,
-  width = 800,
-  height = 400,
   valueKey,
   title = '',
   valueFormatter = (value: number) => `$${(value / 1000).toFixed(0)}B`,
   dateFormatter = (date: Date) => timeFormat("%b %Y")(date),
 }: LineChartProps<TData>) {
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const [dimensions, setDimensions] = useState({ width: 800, height: 400 });
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (svgRef.current) {
+        setDimensions({
+          width: svgRef.current.clientWidth,
+          height: svgRef.current.clientHeight,
+        });
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Set initial dimensions
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   // Chart margins
   const margin = { top: 40, right: 40, bottom: 60, left: 80 };
 
   // Dimensions
-  const innerWidth = width - margin.left - margin.right;
-  const innerHeight = height - margin.top - margin.bottom;
+  const innerWidth = dimensions.width - margin.left - margin.right;
+  const innerHeight = Math.max(dimensions.height - margin.top - margin.bottom, 200); // Set a minimum height of 200
 
   // Accessors
   const xAccessor = (d: TData) => new Date(d.DATE);
@@ -57,16 +74,7 @@ export function LineChart<TData extends DataPoint>({
   const [tooltipData, setTooltipData] = useState<{ date: string; value: number } | null>(null);
 
   return (
-    <svg width={width} height={height} className="overflow-visible">
-      {/* Area under the line */}
-      <AreaClosed
-        data={data}
-        x={(d) => xScale(xAccessor(d))}
-        y={(d) => yScale(yAccessor(d))}
-        yScale={yScale}
-        curve={curveLinear}
-        fill="#e2e8f0"
-      />
+    <svg ref={svgRef} width="100%" height="100%" className="overflow-visible">
 
       {/* Line */}
       <LinePath
@@ -137,7 +145,7 @@ export function LineChart<TData extends DataPoint>({
       {/* Chart Title */}
       {title && (
         <text
-          x={width / 2}
+          x={dimensions.width / 2}
           y={margin.top / 2}
           textAnchor="middle"
           fontSize={16}

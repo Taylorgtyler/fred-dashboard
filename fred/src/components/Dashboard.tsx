@@ -35,10 +35,8 @@ function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 sm:mb-6">
         <MetricCard title="Unemployment Rate" value={urData?.[urData.length - 1]?.UNRATE} description="Unemployment rate in the US" isPercentage={true} />
         <MetricCard title="Labor Force Participation Rate" value={lfprData?.[lfprData.length - 1]?.CIVPART} description="Labor force participation rate in the US" isPercentage={true} />
-        <MetricCard title="GDP Per Capita" value={gdpPCData?.[gdpPCData.length - 1]?.A939RX0Q048SBEA} description="GDP per capita in the US" isPercentage={false} isCurrency={true} />
-        <MetricCard title="GDP" value={gdpData?.[gdpData.length - 1]?.GDPC1} description="GDP in the US" isPercentage={false} isCurrency={true} />
-      </div>
-      <div className="mb-8">
+        <MetricCard title="GDP Per Capita" value={gdpPCData?.[gdpPCData.length - 1]?.A939RX0Q048SBEA} description="GDP per capita in the US" isPercentage={false} isCurrency={true} />      </div>
+      <div className="mb-8 gap-4 grid grid-cols-1 h-64 md:h-96 sm:h-80"> {/* Responsive height: 16rem on small screens, 24rem on medium and larger */}
         <Card title="GDP Over Time">
           {gdpData && (
             <LineChart 
