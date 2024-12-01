@@ -22,3 +22,19 @@ export type FFERData = {
     DATE: string;
     DFF: number;
 }
+
+export type RMPIData = {
+    DATE: string;
+    MEPAINUSA672N: number;
+}
+
+export interface DataItem {
+    [key: string]: string | number;
+}
+
+export interface FilterState {
+    startDate: string;
+    endDate: string;
+    setDateRange: (startDate: string, endDate: string) => void;
+    resetFilters: () => void;
+}

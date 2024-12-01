@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomeIcon, MagnifyingGlassIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -20,9 +20,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
         </a>
         <a href="/explore" className="py-2 hover:bg-gray-800 rounded flex items-center">
           <MagnifyingGlassIcon className="w-4 h-4 mr-2 ml-2" /> <span>Explore</span>
-        </a>
-        <a href="/contact" className="py-2 hover:bg-gray-800 rounded flex items-center">
-          <ChatBubbleBottomCenterTextIcon className="w-4 h-4 mr-2 ml-2" /> <span>Contact</span>
         </a>
       </nav>
     </div>
