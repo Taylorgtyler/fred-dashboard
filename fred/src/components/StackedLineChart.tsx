@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 
 interface StackedLineChartProps {
@@ -70,6 +70,7 @@ export const StackedLineChart: React.FC<StackedLineChartProps> = ({
                         }}
                         labelFormatter={(label) => `Date: ${label}`}
                     />
+                    <Legend verticalAlign="top" height={36}/>
                     <Line 
                         type="monotone" 
                         dataKey="dataset1Value" 
